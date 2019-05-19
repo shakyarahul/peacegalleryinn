@@ -222,3 +222,4 @@ function my_gallery_section_textbox_callback($args) {  // Textbox Callback
 }
 
 require 'model/room.php';
+require 'model/facilities.php';

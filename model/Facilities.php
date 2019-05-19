@@ -28,6 +28,27 @@ class BB_Facilities{
                 'slug' => 'rooms/metatags'
             )
         );
+        $taxonomies['cate'] = array(
+            'labels' => array(
+                'name'=> 'Category',
+                'singular_name'=> 'Category',
+                'edit_item'=> 'Edit Category',
+                'update_item'=> 'Update Category',
+                'add_new_item'=> 'Add Category',
+                'new_item_name'=> 'Add New Category',
+                'all_items'=> 'All Category',
+                'search_items'=> 'Search Category',
+                'popular_items'=> 'Popular Category',
+                'seperate_items_with_comments'=> 'Seperate Category with commas',
+                'add_or_remove_items'=> 'Add or remove Category',
+                'choose_from_most_used'=> 'Choose from most used Category',
+            ),
+            'hierarchical' => false,
+            'query_var' => 'cate',
+            'rewrite' => array(
+                'slug' => 'facility/cates'
+            )
+        );
         $this->register_all_taxonomies($taxonomies);
     }
 

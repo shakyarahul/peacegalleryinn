@@ -195,117 +195,102 @@ $rooms = new WP_Query(array(
                   <div class="col-12 col-md-11 col-lg-10 ">
                      <div class="block-content  gap-one-top-lg">
                         <ul class="block-tabs">
-                           <li class="active ">Cold Beverage</li>
-                           <li class="">Hot Beverage</li>
-                           <li class="">Pastry</li>
+                           <li class="active ">Dedicated</li>
+                           <li class="">Shared</li>
+                           <li class="">On Demand</li>
                         </ul>
                         <ul class="block-tab">
                            <!--Menu list-->
                            <li class="active block-list mt-5">
                               <div class="row">
+                                 <?php 
+                                       $dedicatedFacilities = new WP_Query(array(
+                                           'post_type' => 'bb_facilities',
+                                           'tax_query' => array(
+                                               array (
+                                                   'taxonomy' => 'cate',
+                                                   'field' => 'slug',
+                                                   'terms' => 'personal',
+                                               )
+                                             ),
+                                       ));
+                                       if($dedicatedFacilities->have_posts()){
+                                          while($dedicatedFacilities->have_posts()){
+                                             $dedicatedFacilities->the_post();
+                                    ?>
                                  <div class="col-sm-6">
                                     <div class="block-content mb-4 pb-4">
-                                       <h5 class="uppercase">Iced Coffee — 3 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
+                                       <h5 class="uppercase"><?php echo get_the_title(); ?> </h5>
+                                       <p class="mb-1 mt-1"><?= get_the_content() ?></p>
                                        <span class="dots"></span>
-                                    </div>
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Vanilla Cream Cold — 4 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                       <span class="dots"></span>
-                                    </div>
-                                    <div class="block-content last">
-                                       <h5 class="uppercase">Cold Foam Cascara — 3.75 </h5>
-                                       <p  class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
                                     </div>
                                  </div>
-                                 <div class="col-sm-6 ">
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Caffè Mocha — 4.5</h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
+                                    <?php 
+                                          }
+                                       }
+                                    ?>
+                              </div>
+                           </li>
+                           <!--Menu list-->
+                           <li class=" block-list mt-5">
+                                 <div class="row">
+                                 <?php 
+                                       $dedicatedFacilities = new WP_Query(array(
+                                           'post_type' => 'bb_facilities',
+                                           'tax_query' => array(
+                                               array (
+                                                   'taxonomy' => 'cate',
+                                                   'field' => 'slug',
+                                                   'terms' => 'shared',
+                                               )
+                                             ),
+                                       ));
+                                       if($dedicatedFacilities->have_posts()){
+                                          while($dedicatedFacilities->have_posts()){
+                                             $dedicatedFacilities->the_post();
+                                    ?>
+                                 <div class="col-sm-6">
+                                    <div class="block-content mb-4 pb-4">
+                                       <h5 class="uppercase"><?php echo get_the_title(); ?> </h5>
+                                       <p class="mb-1 mt-1"><?= get_the_content() ?></p>
                                        <span class="dots"></span>
-                                    </div>
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Cold Chocolate — 3.2 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                       <span class="dots"></span>
-                                    </div>
-                                    <div class="block-content last">
-                                       <h5 class="uppercase">White Chocolate Mocha — 2.75   </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                       
                                     </div>
                                  </div>
+                                    <?php 
+                                          }
+                                       }
+                                    ?>
                               </div>
                            </li>
                            <!--Menu list-->
                            <li class=" block-list mt-5">
                               <div class="row">
+                                 <?php 
+                                       $dedicatedFacilities = new WP_Query(array(
+                                           'post_type' => 'bb_facilities',
+                                           'tax_query' => array(
+                                               array (
+                                                   'taxonomy' => 'cate',
+                                                   'field' => 'slug',
+                                                   'terms' => 'ondemand',
+                                               )
+                                             ),
+                                       ));
+                                       if($dedicatedFacilities->have_posts()){
+                                          while($dedicatedFacilities->have_posts()){
+                                             $dedicatedFacilities->the_post();
+                                    ?>
                                  <div class="col-sm-6">
                                     <div class="block-content mb-4 pb-4">
-                                       <h5 class="uppercase">Caffè Americano — 3 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
+                                       <h5 class="uppercase"><?php echo get_the_title(); ?> </h5>
+                                       <p class="mb-1 mt-1"><?= get_the_content() ?></p>
                                        <span class="dots"></span>
                                     </div>
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Espresso — 4 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                       <span class="dots"></span>
-                                    </div>
-                                    <div class="block-content last">
-                                       <h5 class="uppercase">Cappuccino — 3.75 </h5>
-                                       <p  class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
                                  </div>
-                                 <div class="col-sm-6 ">
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Iced Caffè Mocha — 4.5</h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                       <span class="dots"></span>
-                                    </div>
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Vanilla Latte — 3.2 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                       <span class="dots"></span>
-                                    </div>
-                                    <div class="block-content last">
-                                       <h5 class="uppercase">Hot Chocolate — 2.75   </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </li>
-                           <!--Menu list-->
-                           <li class=" block-list mt-5">
-                              <div class="row">
-                                 <div class="col-sm-6">
-                                    <div class="block-content mb-4 pb-4">
-                                       <h5 class="uppercase">Mango Nut Bread — 3 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Chocolate Croissant — 4 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
-                                    <div class="block-content last">
-                                       <h5 class="uppercase">Chocolate Chunk Brownie — 3.75 </h5>
-                                       <p  class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
-                                 </div>
-                                 <div class="col-sm-6 ">
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Iced Lemon Cake — 4.5</h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
-                                    <div class="block-content  mb-4 pb-4">
-                                       <h5 class="uppercase">Plain Bagel — 3.2 </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
-                                    <div class="block-content last">
-                                       <h5 class="uppercase">Cinnamon Raisin Bagel — 2.75   </h5>
-                                       <p class="mb-1 mt-1">Mango, Tropical Juices and a Hint of Coconut Blended with Ice and Swirled with Raspberry Puree.</p>
-                                    </div>
-                                 </div>
+                                    <?php 
+                                          }
+                                       }
+                                    ?>
                               </div>
                            </li>
                         </ul>
