@@ -1,15 +1,17 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <?php 
 $args = array(
     'post_type' => 'attachment',
+    'posts_per_page' =>25,
 );
 $attachments = get_posts($args);
-?>
 
-<?php 
-$rooms = new WP_Query(array(
-    'post_type' => 'bb_room',
-));
+$args = array(
+    'post_type' => 'attachment',
+    'posts_per_page' =>25,
+    'author' => 2
+);
+$slides = get_posts($args);
 ?>
 <html lang="en">
 <head>
@@ -51,16 +53,24 @@ $rooms = new WP_Query(array(
             <!--Main slider-->
             <div class="main-slider slider flexslider">
                <ul class="slides">
+                  <?php
+                     if ($slides) {
+                        foreach ($slides as $attachment) {
+                           $url = get_attachment_link($attachment->ID);// extraigo la _posturl del attachmnet      
+                           $img =  wp_get_attachment_image_src($attachment->ID, 'large');
+                           //$img1 =  wp_get_attachment_image_src($attachment->ID, 'full');
+                           $title = get_the_title($attachment->post_parent);//extraigo titulo
+                  ?>  
                   <li>
                      <div class="background-img overlay zoom">
-                        <img src="<?=get_template_directory_uri() ?>/img/1.jpg" alt="">
+                        <img src="<?=$img[0] ?>" alt="">
                      </div>
                   </li>
-                  <li>
-                     <div class="background-img overlay zoom">
-                        <img src="img/2.jpg" alt="">
-                     </div>
-                  </li>
+                  <?php 
+                        }
+                     }
+                  ?>
+                  
                </ul>
             </div>
             <!--End main slider-->
@@ -79,8 +89,8 @@ $rooms = new WP_Query(array(
                         </a>
                      </div>
                      <ul class="main-menu list-inline">
-                        <li><a class="scroll list-inline-item" href="#about">about</a></li>
-                        <li><a class="scroll list-inline-item" href="#menu">menu</a></li>
+                        <li><a class="scroll list-inline-item" href="#about">About</a></li>
+                        <li><a class="scroll list-inline-item" href="#menu">Menu</a></li>
                         <li><a class="scroll list-inline-item" href="#offer">Offer</a></li>
                         <li><a class="scroll list-inline-item" href="#location">Location</a></li>
                         <li><a class="scroll list-inline-item" href="#reservation">Reservation</a></li>
@@ -201,8 +211,8 @@ $rooms = new WP_Query(array(
                         </ul>
                         <ul class="block-tab">
                            <!--Menu list-->
-                           <li class="active block-list mt-5">
-                              <div class="row">
+                           <li class="block-list mt-5 active">
+                                 <div class="row">
                                  <?php 
                                        $dedicatedFacilities = new WP_Query(array(
                                            'post_type' => 'bb_facilities',
@@ -218,7 +228,7 @@ $rooms = new WP_Query(array(
                                           while($dedicatedFacilities->have_posts()){
                                              $dedicatedFacilities->the_post();
                                     ?>
-                                 <div class="col-sm-6">
+                                 <div class="col-sm-5">
                                     <div class="block-content mb-4 pb-4">
                                        <h5 class="uppercase"><?php echo get_the_title(); ?> </h5>
                                        <p class="mb-1 mt-1"><?= get_the_content() ?></p>
@@ -232,7 +242,7 @@ $rooms = new WP_Query(array(
                               </div>
                            </li>
                            <!--Menu list-->
-                           <li class=" block-list mt-5">
+                           <li class="block-list mt-5">
                                  <div class="row">
                                  <?php 
                                        $dedicatedFacilities = new WP_Query(array(
@@ -249,7 +259,7 @@ $rooms = new WP_Query(array(
                                           while($dedicatedFacilities->have_posts()){
                                              $dedicatedFacilities->the_post();
                                     ?>
-                                 <div class="col-sm-6">
+                                 <div class="col-sm-5">
                                     <div class="block-content mb-4 pb-4">
                                        <h5 class="uppercase"><?php echo get_the_title(); ?> </h5>
                                        <p class="mb-1 mt-1"><?= get_the_content() ?></p>
@@ -280,7 +290,7 @@ $rooms = new WP_Query(array(
                                           while($dedicatedFacilities->have_posts()){
                                              $dedicatedFacilities->the_post();
                                     ?>
-                                 <div class="col-sm-6">
+                                 <div class="col-sm-5">
                                     <div class="block-content mb-4 pb-4">
                                        <h5 class="uppercase"><?php echo get_the_title(); ?> </h5>
                                        <p class="mb-1 mt-1"><?= get_the_content() ?></p>
@@ -372,14 +382,14 @@ $rooms = new WP_Query(array(
                         <div class="offer-slider flexslider">
                            <ul class="slides">
                               <?php
-                                 if($rooms->have_posts()){
-                                    while($rooms->have_posts()){
-                                       $rooms->the_post();
+                                 if(have_posts()){
+                                    while(have_posts()){
+                                       the_post();
                                 ?>
                               <li>
-                                 <div 
-                              <?php if (has_post_thumbnail( $rooms->ID ) ){ ?>
-                                 <?php $image =  wp_get_attachment_image_src(get_post_thumbnail_id($rooms->ID),"full") ?>
+                                 <a href="<?=get_the_permalink()?>"><div 
+                              <?php if (has_post_thumbnail( get_the_ID() ) ){ ?>
+                                 <?php $image =  wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()),"full") ?>
                               style="background-image:url('<?php echo $image[0]; ?>');background-size: cover"
                            <?php } ?>
                               class="block-offer m-auto pt-5 pb-5\ text-white">
@@ -392,7 +402,7 @@ $rooms = new WP_Query(array(
                                        <h4 class=" uppercase"><?= get_the_title(); ?></h4>
                                        <p class=" m-auto"><?= get_the_excerpt() ?></p>
                                     </div>
-                                 </div>
+                                 </div></a>
                               </li>
                              <?php
                                   }
@@ -502,7 +512,6 @@ $rooms = new WP_Query(array(
          <!-- As a general rule, include a heading (h1-h6) as a child of each section and article element for screen readers purposes-->
             <h2 class="indent">Gallery</h2>
             <div class="masonry-wrapper"><div class="masonry"><?php
-            $i=0;
 if ($attachments) {
     foreach ($attachments as $attachment) {
       $url = get_attachment_link($attachment->ID);// extraigo la _posturl del attachmnet      
